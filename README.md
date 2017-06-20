@@ -14,6 +14,14 @@ afterward
 This was inspired by the docker image that github user: joebo created to run J under the tinycore distro:
 https://github.com/joebo/docker-tinycore-jhs
 
+For J to run under the openwhisk/dockerskeleton distro which is based on Alpine you need the GNU libc installed
+in the image. The image commands for this are lifted from user frol:
+https://github.com/frol/docker-alpine-glibc
+
+Since this the idea of this image was to run in conjunction with OpenWhisk. The design decision was to 
+keep the base image from openwhisk/dockerskeleton and modify it based on docker-alpine-glibc and docker-tinycore-jhs
+to get the J language environment operational.
+
 To build this image issue the following command from the source directory:
 docker build --no-cache=true -t porteverglades/alpine-j-whisk .
 
