@@ -1,11 +1,26 @@
 # alpine-j-whisk
-Docker source for image that runs J language under the IBM OpenWhisk dockerskeleton/alpine distro
+Docker source for image that runs J language under the IBM Bluemix and OpenWhisk openwhisk/dockerskeleton distro
+
+The dockerfile expects J addons: convert/json and convert/misc to have been downloaded to the build 
+directory. Since they are subject to revision I did not include them here. Go to the J software website:
+
+http://www.jsoftware.com
+
+To obtain any addons as compressed files and place them in your build directory. See the COPY command
+in the Docker file for how to get them into the image. Also look at the RUN command following the COPY 
+it has tar commands to expand the addons and place them in their proper location and clean up the directories
+afterward
 
 This was inspired by the docker image that github user: joebo created to run J under the tinycore distro:
 https://github.com/joebo/docker-tinycore-jhs
 
+To build this image issue the following command from the source directory:
+docker build --no-cache=true -t porteverglades/alpine-j-whisk .
+
 To run this image for OpenWhisk purposes use the following command:
 docker run -p 127.0.0.1:8080:8080 -d --name testing porteverglades/alpine-j-whisk
+
+
 
 When debugging the image it is nice to be able to open a shell running on the image.
 An internet search found: 
