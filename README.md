@@ -22,14 +22,27 @@ Since this the idea of this image was to run in conjunction with OpenWhisk. The 
 keep the base image from openwhisk/dockerskeleton and modify it based on docker-alpine-glibc and docker-tinycore-jhs
 to get the J language environment operational.
 
+## Build and Run
 To build this image issue the following command from the source directory:
 docker build --no-cache=true -t porteverglades/alpine-j-whisk .
 
 To run this image for OpenWhisk purposes use the following command:
 docker run -p 127.0.0.1:8080:8080 -d --name testing porteverglades/alpine-j-whisk
 
+## OpenWhisk
+Under IBM Bluemix follow the directions for downloading the Whisk CLI
+Under the 'wsk' environment, login into to your bluemix account
 
+Then the following CLI commands will test the docker action using whisk
 
+wsk action create --docker dkecho porteverglades/alpine-j-whisk:v01
+
+wsk action invoke --blocking --result dkecho --param msg "hello world"
+
+NOTE: don't forget the tag of the docker image. It's important otherwise OpenWhisk
+will not be able to load the image.
+
+## Debugging the Docker image
 When debugging the image it is nice to be able to open a shell running on the image.
 An internet search found: 
 
